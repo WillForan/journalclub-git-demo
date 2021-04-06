@@ -1,0 +1,168 @@
+#+TITLE: git
+#+Date: 2021-04-09
+
+[[imghttps://octodex.github.com/images/baracktocat.jpg]]
+
+
+* Take Home
+  
+** git essentials
+   init; add/rm, commit, push; pull; diff, status, log, blame
+
+** git extras
+   fork/branch, merge, checkout
+
+** forges (github)
+   issue, pull request
+
+** BFG
+   remove committed passwords, large files
+
+** bonus
+   grip, gitmoji, continuous integration
+
+
+* Meta
+
+ #+begin_quote
+The best time to plant a ~.git~ folder was 10 changes ago.
+The second best time is now.
+ #+end_quote
+
+** prereqs
+
+1. git should already be installed.
+2. have access to a terminal (Rstudio terminal okay)
+
+** Workshop w/Will
+ There are a few "slides" for context,
+ but most of the time should be actually using git
+
+ use <-> grok is cyclical. It's going to be painful
+
+** lens 
+ Useful to think of collaboration and "blame" w.r.t. your future self.
+
+
+** colophon
+ This file is
+ ~/Volumes/L/bea_res/Luna/Journal mtg/20210409_git_wf/git.org~
+
+ presenting with emacs ~org-mode~ + ~org-presenter~
+ ~doom-solarazied-light~ color scheme,
+ ~beacon-mode~ and ~global-hl-line-mode~
+
+ ~(setq org-hide-emphasis-markers t)~
+ keys: C-c C-u parent, C-c C-p prev
+  speed cmd: n/p=next/prev, f/b=forward/back, m=show me, s=toggle narrow
+   
+* SCM, VCS
+Source Control Management or Version Control Software:
+
+Think:
+Word's "track changes" for code (or any text file, and even filesystem metadata)
+
+** History and Choices
+  * email list with "patches" sent back and forth
+  * centralized: SCCS (1972) -> RCS (1982) -> CVS (1986) -> svn (2000)
+  * distributed: BitKeeper (2000) -> *git* (2005). many others
+ 
+** Git won
+   * used to develop Linux
+   * distributed, easy low cost "fork"
+   * social network effects
+
+*** b/c github
+    * github (2008) acquisition by MS (2018).
+    * hosts >190 million repositories (as of 2020-01)
+    * mascot/logo "octocat" by the same guy who drew the twitter bird logo
+
+* Why
+** Versioning 
+  * avoid: ~xyz_final~, ~xyz_final_final1~, ~xyz_final_final_0930~, 
+  * "blame" history: what happened when
+  * organize versions:  branches, tags, commits
+  * experimenting locally (distributed changes)
+    like merging 3 different paper revisions at the same time
+
+** Github Hosting
+    * versioned backup
+    * visual diffs online
+    * fast search
+    * sharing and "exposure"
+    * collaborate (issues, pull requests)
+** As a Standard
+   adopted elsewhere: brianlife.io, datalad, CRAN
+* What its not
+   * not easy
+   * not centralized
+     not intended share scripts/ directory
+        but still very useful (see "blame")
+   * not for binary data
+     Not useful for tracking changes in images, nifti files
+     * see ~datalad~ (~git-annex~) to track size, checksum, permissions
+     * onedrive, gdrive, box, etc
+
+ 
+* Getting started
+  finally!
+
+init, add, commit, push
+
+** ~config~ - once per computer
+   #+begin_src shell
+
+     git config --global user.name "Your Name"      # how you'll show up in the logs
+     git config --global user.email "user@pitt.edu" # should match github 
+
+     # all that did was write to a file
+     git config --list
+     cat ~/.gitconfig
+
+   #+end_src
+** ~init~ - once per repository
+
+initialize the git repository files.
+namely create a .git/ directory at the root of the project
+
+   #+begin_src shell
+
+     mkdir my-test-git-repo
+     cd $_  # $_ is last argument from before; also alt+. 
+     git init
+
+     ls -la  # see new .git directory
+     #+end_src
+     
+
+*** using alt w/macOS terminals     
+[[imghttps://cdn.osxdaily.com/wp-content/uploads/2013/02/meta-key-mac-os-x-terminal.jpg]]
+
+** ~add~, ~commit~ - once per change set
+** ~diff~, ~status~, ~log~ - whats happening
+
+~log~ is history
+~status~ is what has yet to be added to the history
+
+   #+begin_src shell
+     git status         # any changes not tracked
+     git status -uno    # any changes only in files already tracked
+     git log            # history
+   #+end_src
+   
+** in a nutshell
+  [[imghttps://imgs.xkcd.com/comics/git.png]]
+
+
+  
+* Pulling
+* Resources
+  
+https://github.com/LabNeuroCogDevel/allscripts
+
+https://git-scm.com/book/en/v2
+
+https://happygitwithr.com/big-picture.html
+  https://peerj.com/preprints/3159v2/
+
+https://gitmoji.dev/
