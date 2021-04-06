@@ -18,13 +18,21 @@
 ** BFG
    remove committed passwords, large files
 
+   
+** end goal
+0. use git to record changes
+1. upload repo and changes to github
+2. create issues
+3. create and accept pull requests
+4. update themebot theme lists
+
 ** bonus
    grip, gitmoji, continuous integration
 
 
 * Meta
 
- #+begin_quote
+ #+begin_quote old proverb
 The best time to plant a ~.git~ folder was 10 changes ago.
 The second best time is now.
  #+end_quote
@@ -56,6 +64,37 @@ The second best time is now.
  keys: C-c C-u parent, C-c C-p prev
   speed cmd: n/p=next/prev, f/b=forward/back, m=show me, s=toggle narrow
    
+* In science?
+
+  #+begin_quote http://blogs.nature.com/naturejobs/2018/06/11/git-the-reproducibility-tool-scientists-love-to-hate/
+“I hate Git….  It is one of the worst pieces of software to teach that
+I’ve come across in 35 years of teaching people software.” But, he
+adds, mastering Git is as essential to modern research as learning to
+read English. Those who use Git and have become immune to its
+complexity
+  #+end_quote
+
+get excited
+
+** lncd
+   history of changes to the tat2 script. see ~134aeb1~
+   https://github.com/LabNeuroCogDevel/lncdtools/commits/master/tat2
+   
+   github search all our scripts: 3dMEMA examples
+   https://github.com/LabNeuroCogDevel/allscripts/search?q=3dMEMA
+   
+   preprocessFunctional only started using ants 3 years ago
+   https://github.com/LabNeuroCogDevel/fmri_processing_scripts/blame/master/preproc_functions/parse_args#L63
+
+   lncdr file list
+   https://github.com/LabNeuroCogDevel/LNCDR/tree/master/R
+   
+** collab
+https://github.com/Jfortin1/ComBatHarmonization/issues/29 (dependency issue)
+https://github.com/raamana/pyradigm/pull/47/files (naming things bug)
+https://github.com/PennBBL/qsiprep/pull/50 (bids validate issue)
+
+
 * SCM, VCS
 Source Control Management or Version Control Software:
 
@@ -78,14 +117,22 @@ Word's "track changes" for code (or any text file, and even filesystem metadata)
     * mascot/logo "octocat" by the same guy who drew the twitter bird logo
 
 * Why
+    [[imghttp://phdcomics.com/comics/archive/phd101212s.gif]]
 ** Versioning 
-  * avoid: ~xyz_final~, ~xyz_final_final1~, ~xyz_final_final_0930~, 
+  * avoid: ~xyz_final~, ~xyz_final_final1~, ~xyz_final_final_0409~, 
   * "blame" history: what happened when
+    - find that errant "s" accidentally inserted in place of cmd+s
   * organize versions:  branches, tags, commits
   * experimenting locally (distributed changes)
     like merging 3 different paper revisions at the same time
+  * commits are documentation
 
 ** Github Hosting
+
+   #+begin_quote http://blogs.nature.com/naturejobs/2018/06/11/git-the-reproducibility-tool-scientists-love-to-hate/
+Git is the price you have to pay in order to use GitHub
+   #+end_quote
+
     * versioned backup
     * visual diffs online
     * fast search
@@ -96,20 +143,26 @@ Word's "track changes" for code (or any text file, and even filesystem metadata)
 * What its not
    * not easy
    * not centralized
-     not intended share scripts/ directory
-        but still very useful (see "blame")
+     not designed for share directory (e.g. ~Hera/.../scripts/~)
+        but still very useful (see "log" and "blame")
    * not for binary data
      Not useful for tracking changes in images, nifti files
      * see ~datalad~ (~git-annex~) to track size, checksum, permissions
      * onedrive, gdrive, box, etc
+   * ~git~ does not have any concept of issues or pull-requests
+     "forges" (github, gitlab, bitbucket) provide that
+
 
  
 * Getting started
-  finally!
 
-init, add, commit, push
+  finally! Open a terminal. lets get started
 
-** ~config~ - once per computer
+We'll work through git on the terminal first.
+There are gui programs too: embeded in Rstudio
+It'll hopefully make it easier to understand github.
+
+** ~config~ - once per computer+user
    #+begin_src shell
 
      git config --global user.name "Your Name"      # how you'll show up in the logs
@@ -149,20 +202,69 @@ namely create a .git/ directory at the root of the project
      git status -uno    # any changes only in files already tracked
      git log            # history
    #+end_src
-   
+** visuals
+*** TODO  
+*** gitk
+
 ** in a nutshell
   [[imghttps://imgs.xkcd.com/comics/git.png]]
 
 
   
+  
+* IDE built in tools
+** Rstudio
+*** create "project" (*.Rproj) file
+ https://support.rstudio.com/hc/en-us/articles/200532077-Version-Control-with-Git-and-SVN
+*** "Git" panel
+
+
+ #+begin_quote https://r-pkgs.org/git.html
+ However, because only a handful of the 150+ Git commands are available
+ in RStudio, you also need to be familiar with using Git from the shell
+ (aka the command line or the console). It’s also useful to be familiar
+ with using Git in a shell because if you get stuck you’ll need to
+ search for a solution with the Git command names.
+ #+end_quote
+** MATLAB
+** Atom, emacs, vim
+
 * Pulling
 * Resources
   
-https://github.com/LabNeuroCogDevel/allscripts
+repo of all *sh *R *m *pl files on LNCD RAIDs
+  https://github.com/LabNeuroCogDevel/allscripts
 
-https://git-scm.com/book/en/v2
+common problem and solution
+ https://ohshitgit.com/
+ https://dangitgit.com/
 
+git+Rstudio setup tutorial
+ https://r-pkgs.org/git.html
+
+more detailed git+R tutorial (University of British Columbia STAT 545)
 https://happygitwithr.com/big-picture.html
   https://peerj.com/preprints/3159v2/
 
+git official book
+ https://git-scm.com/book/en/v2
+
+github's own tutorial
+  https://docs.github.com/en/github/getting-started-with-github/set-up-git
+  https://guides.github.com/introduction/flow/
+  https://guides.github.com/introduction/git-handbook/
+
+quick presentation (nice checksum animation)
+ https://karthik.github.io/git_intro/#/chacon70
+
+after the basics (blog post format)
+ https://towardsdatascience.com/a-guide-to-git-for-data-scientists-fd68bc1c729
+
+PLOS paper describing git for science
+  https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1004668 
+
+videos developed by gitkraken ($$ git gui client)
+https://www.gitkraken.com/teacher-resources#get-started 
+
+proposed emoji tags for git commits
 https://gitmoji.dev/
