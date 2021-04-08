@@ -1,34 +1,39 @@
 #+TITLE: git
 #+Date: 2021-04-09
 
-[[imghttps://octodex.github.com/images/baracktocat.jpg]]
-
+Word's "track changes" for code
 
 * Take Home
-  
-** git essentials
-   init; add/rm, commit, push; pull; diff, status, log, blame
 
-** git extras
-   fork/branch, merge, checkout
+  #+begin_quote http://blogs.nature.com/naturejobs/2018/06/11/git-the-reproducibility-tool-scientists-love-to-hate/
+“I hate Git….  It is one of the worst pieces of software to teach that
+I’ve come across in 35 years of teaching people software.” But, he
+adds, mastering Git is as essential to modern research as learning to
+read English. Those who use Git and have become immune to its
+complexity
+  #+end_quote
 
-** forges (github)
-   issue, pull request
-
-** BFG
-   remove committed passwords, large files
-
-   
 ** end goal
-0. use git to record changes
-1. upload repo and changes to github
-2. create issues
-3. create and accept pull requests
-4. update themebot theme lists
-
-** bonus
-   grip, gitmoji, continuous integration
-
+  1. use git to record changes
+  2. use rstudio's git panel
+  3. upload repo and changes to github
+  4. create issues
+  5. create and accept pull requests
+  6. update themebot theme lists
+     
+** details
+*** git essentials (temrinal, Rstudio)
+    init; add/rm, commit, push; pull; diff, status, log, blame
+*** git in Rstudio
+    git panel, diff, log
+*** git extras
+    fork/branch, merge, checkout
+*** forges (github)
+    issue, pull request
+*** BFG
+    remove committed passwords, large files
+*** bonus
+    grip, gitmoji, continuous integration
 
 * Meta
 
@@ -38,9 +43,8 @@ The second best time is now.
  #+end_quote
 
 ** prereqs
-
-1. git should already be installed.
-2. have access to a terminal (Rstudio terminal okay)
+    1. git should already be installed.
+    2. have access to a terminal (Rstudio terminal okay)
 
 ** Workshop w/Will
  There are a few "slides" for context,
@@ -49,7 +53,8 @@ The second best time is now.
  use <-> grok is cyclical. It's going to be painful
 
 ** lens 
- Useful to think of collaboration and "blame" w.r.t. your future self.
+ Useful to think of collaboration and "blame"
+ w.r.t. your future self
 
 
 ** colophon
@@ -64,103 +69,89 @@ The second best time is now.
  keys: C-c C-u parent, C-c C-p prev
   speed cmd: n/p=next/prev, f/b=forward/back, m=show me, s=toggle narrow
    
-* In science?
-
-  #+begin_quote http://blogs.nature.com/naturejobs/2018/06/11/git-the-reproducibility-tool-scientists-love-to-hate/
-“I hate Git….  It is one of the worst pieces of software to teach that
-I’ve come across in 35 years of teaching people software.” But, he
-adds, mastering Git is as essential to modern research as learning to
-read English. Those who use Git and have become immune to its
-complexity
-  #+end_quote
-
-get excited
-
-** lncd
-   history of changes to the tat2 script. see ~134aeb1~
-   https://github.com/LabNeuroCogDevel/lncdtools/commits/master/tat2
-   
-   github search all our scripts: 3dMEMA examples
-   https://github.com/LabNeuroCogDevel/allscripts/search?q=3dMEMA
-   
-   preprocessFunctional only started using ants 3 years ago
-   https://github.com/LabNeuroCogDevel/fmri_processing_scripts/blame/master/preproc_functions/parse_args#L63
-
-   lncdr file list
-   https://github.com/LabNeuroCogDevel/LNCDR/tree/master/R
-   
-** collab
-https://github.com/Jfortin1/ComBatHarmonization/issues/29 (dependency issue)
-https://github.com/raamana/pyradigm/pull/47/files (naming things bug)
-https://github.com/PennBBL/qsiprep/pull/50 (bids validate issue)
-
-
-* SCM, VCS
-Source Control Management or Version Control Software:
-
-Think:
-Word's "track changes" for code (or any text file, and even filesystem metadata)
-
-** History and Choices
-  * email list with "patches" sent back and forth
-  * centralized: SCCS (1972) -> RCS (1982) -> CVS (1986) -> svn (2000)
-  * distributed: BitKeeper (2000) -> *git* (2005). many others
- 
-** Git won
-   * used to develop Linux
-   * distributed, easy low cost "fork"
-   * social network effects
-
-*** b/c github
-    * github (2008) acquisition by MS (2018).
-    * hosts >190 million repositories (as of 2020-01)
-    * mascot/logo "octocat" by the same guy who drew the twitter bird logo
-
 * Why
     [[imghttp://phdcomics.com/comics/archive/phd101212s.gif]]
 ** Versioning 
-  * avoid: ~xyz_final~, ~xyz_final_final1~, ~xyz_final_final_0409~, 
-  * "blame" history: what happened when
-    - find that errant "s" accidentally inserted in place of cmd+s
-  * organize versions:  branches, tags, commits
-  * experimenting locally (distributed changes)
-    like merging 3 different paper revisions at the same time
-  * commits are documentation
+*** avoid copies of copies 
+    ~xyz_final~, ~xyz_final_final1~, ~xyz_final_final_0409~,
+*** history: what happened when
+    find that errant "s" accidentally inserted in place of cmd+s
 
+   history of changes to the tat2 script. see ~134aeb1~
+   https://github.com/LabNeuroCogDevel/lncdtools/commits/master/tat2
+*** organize versions
+    branches, tags, commits
+*** experimenting locally (distributed changes)
+    like merging 3 different paper revisions at the same time
+*** commits are documentation
+    note for future: write good commit messages
+    (bad: "update", "bug fix")
 ** Github Hosting
 
    #+begin_quote http://blogs.nature.com/naturejobs/2018/06/11/git-the-reproducibility-tool-scientists-love-to-hate/
 Git is the price you have to pay in order to use GitHub
    #+end_quote
 
-    * versioned backup
-    * visual diffs online
-    * fast search
-    * sharing and "exposure"
-    * collaborate (issues, pull requests)
+*** versioned backup
+   lncdr file list
+   https://github.com/LabNeuroCogDevel/LNCDR/tree/master/R
+
+*** visual diffs online
+   preprocessFunctional only started using ants 3 years ago
+   * [[https://github.com/LabNeuroCogDevel/fmri_processing_scripts/commit/e0bf5b353a47f62ef9cf731c9ea03faa122b1869][diff]]
+   * [[https://github.com/LabNeuroCogDevel/fmri_processing_scripts/blame/master/preproc_functions/parse_args#L63][blame]]
+
+*** fast search
+   github search all our scripts: 3dMEMA examples
+   https://github.com/LabNeuroCogDevel/allscripts/search?q=3dMEMA
+   
+*** sharing and "exposure"
+*** collaborate 
+    issues, pull requests
+   * [[https://github.com/Jfortin1/ComBatHarmonization/issues/29][dependency issue]]
+   * [[https://github.com/raamana/pyradigm/pull/47/files][naming things bug]]
+   * [[https://github.com/PennBBL/qsiprep/pull/50][bids validate issue]]
+   * [[https://github.com/ABCD-STUDY/nda-abcd-s3-downloader/pull/3][improve docs]]
 ** As a Standard
    adopted elsewhere: brianlife.io, datalad, CRAN
 * What its not
-   * not easy
-   * not centralized
+*** not easy
+*** not centralized
      not designed for share directory (e.g. ~Hera/.../scripts/~)
         but still very useful (see "log" and "blame")
-   * not for binary data
+*** not for binary data
      Not useful for tracking changes in images, nifti files
      * see ~datalad~ (~git-annex~) to track size, checksum, permissions
      * onedrive, gdrive, box, etc
-   * ~git~ does not have any concept of issues or pull-requests
+*** ~git~ does not have any concept of issues or pull-requests
      "forges" (github, gitlab, bitbucket) provide that
 
 
- 
 * Getting started
 
-  finally! Open a terminal. lets get started
+  Finally!
+  Open a terminal. RStudio terminal will work
+  
+  Follow along.
+  At the very least, it'll add useful bash history 
+   (up/down arrow, ~Ctrl+r~)
+  
+  NB. ~config~ and ~init~ and ~remote add~ are setup commands.
+     other commands are for actually tracking changes
 
-We'll work through git on the terminal first.
-There are gui programs too: embeded in Rstudio
-It'll hopefully make it easier to understand github.
+
+** terminal, really?
+   #+begin_quote https://r-pkgs.org/git.html
+... because only a handful of the 150+ Git commands are available in
+RStudio, you also need to be familiar with using Git from the shell
+(aka the command line or the console). It’s also useful to be familiar
+with using Git in a shell because if you get stuck you’ll need to
+search for a solution with the Git command names.
+   #+end_quote
+
+  * terminal is what git developers designed for
+  * it's where stack overflow help is
+  * but ~gitk~ and https://git-scm.com/downloads/guis
 
 ** ~config~ - once per computer+user
    #+begin_src shell
@@ -173,10 +164,13 @@ It'll hopefully make it easier to understand github.
      cat ~/.gitconfig
 
    #+end_src
+   
+ will also do this w/ youruser@rhea
+
 ** ~init~ - once per repository
 
 initialize the git repository files.
-namely create a .git/ directory at the root of the project
+this creates a ~.git/~ directory at the root of the project
 
    #+begin_src shell
 
@@ -187,31 +181,122 @@ namely create a .git/ directory at the root of the project
      ls -la  # see new .git directory
      #+end_src
      
+     this needs to happen only once per coding project.
+     Also
 
 *** using alt w/macOS terminals     
 [[imghttps://cdn.osxdaily.com/wp-content/uploads/2013/02/meta-key-mac-os-x-terminal.jpg]]
 
 ** ~add~, ~commit~ - once per change set
-** ~diff~, ~status~, ~log~ - whats happening
+   #+begin_src shell
+     date > date.txt
+     git add date.txt       # alt-. or $_
+     git commit -m 'add date.txt: current date time'
+   #+end_src
 
-~log~ is history
-~status~ is what has yet to be added to the history
+** ~log~, ~status~, ~diff~ - whats happening
 
    #+begin_src shell
-     git status         # any changes not tracked
-     git status -uno    # any changes only in files already tracked
-     git log            # history
+     git log                      # history
+     git log --oneline            # condensed
+
+     git status                   # any changes not tracked
+
+     date > date.txt             # modify file
+     echo "foobar" > foobar.txt  # new file, untracked
+
+     git diff date.txt           # red removed, green added
+                                  # foobar.txt not mentioned
+
+     git status                   # date.txt and foobar.txt
+     git status -uno              # only date.txt (NB. -u no)
    #+end_src
-** visuals
-*** TODO  
-*** gitk
+
+** repeat
+
+   #+begin_src shell
+     git add date.txt            # tell git to care about change
+     git commit -m 'update time' # and document it
+
+     git add foobar.txt
+     git commit -m 'add foobar file'
+
+     # likely to have more than one change at a time
+     git mv foobar.txt spam.txt # mv with git preserves history
+     echo ham > spam.txt
+     date     > date.txt
+
+     head *txt # just to see current state, not git related
+     git diff
+     git commit -m 'change metasynatic variable name'
+   #+end_src
+   
+** Try it out
+  1. make two new files. add and commit them. confirm with log
+  2. change a file. add. commit. confirm with log
+  3. change one of the files. add. look at diff. anything funny?
+  4. change the same file. look at diff. notice missing history?
+  5. commit double changed file. look at log
+ 
+*** notes
+**** change. add. change. add. commit. tracks as single change
+     add stages for commit. commit finalizes. 
+
+** github: ~push~
+   
+*** open repo  -- once per repository
+
+ - from [[http://www.github.com]]
+   tell local about github
+   #+begin_src bash
+    # as it says in the new repo
+    #git remote add origin https://github.com/USER/REPO
+    git remote add origin https://github.com/WillForan/github-testing.git
+
+   #+end_src
+
+ - or with ~gh~
+   #+begin_src bash
+     # gh repo new USERNAME/repo-name
+     gh repo new WillForan/test-repo
+   #+end_src
+
+*** push to repo
+    #+begin_src bash
+      git push
+
+
+    #+end_src
+
+** experiments
+also see [[ohshitgit.com]] ([[dangitgit.com]] in polite company)
+
+working - staged - HEAD. come back to this from inside Rstudio
+#+begin_src bash
+
+  date > date.txt
+  git diff
+
+  git add date
+  git diff
+
+  git reset -- date.txt
+  git diff
+
+#+end_src
+   
 
 ** in a nutshell
   [[imghttps://imgs.xkcd.com/comics/git.png]]
 
+  #+begin_src dangitgit.com (ohshitgit.com)
+Forget this noise, I give up.
+    cd ..
+    sudo rm -r stupid-git-repo-dir
+    git clone https://some.github.url/stupid-git-repo-dir.git
+    cd stupid-git-repo-dir
+  #+end_src
 
-  
-  
 * IDE built in tools
 ** Rstudio
 *** create "project" (*.Rproj) file
@@ -268,3 +353,24 @@ https://www.gitkraken.com/teacher-resources#get-started
 
 proposed emoji tags for git commits
 https://gitmoji.dev/
+* SCM, VCS
+Source Control Management or Version Control Software:
+
+Think:
+Word's "track changes" for code (or any text file, and even filesystem metadata)
+
+** History and Choices
+  * email list with "patches" sent back and forth
+  * centralized: SCCS (1972) -> RCS (1982) -> CVS (1986) -> svn (2000)
+  * distributed: BitKeeper (2000) -> *git* (2005). many others
+ 
+** Git won
+   * used to develop Linux
+   * distributed, easy low cost "fork"
+   * social network effects
+
+*** b/c github
+    * github (2008) acquisition by MS (2018).
+    * hosts >190 million repositories (as of 2020-01)
+    * mascot/logo "octocat" by the same guy who drew the twitter bird logo
+
