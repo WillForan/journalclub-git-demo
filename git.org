@@ -1,27 +1,26 @@
 #+TITLE: git
 #+Date: 2021-04-09
 
+* Intro
 Word's "track changes" for code
 
+#+begin_quote nature tech blog
+ “I hate Git….  It is one of the worst pieces of software to teach that
+ I’ve come across in 35 years of teaching people software.” But, he
+ adds, mastering Git is as essential to modern research as learning to
+ read English.
+
+ Those who use Git and have become immune to its complexity
+   #+end_quote
+
 * Take Home
-
-  #+begin_quote http://blogs.nature.com/naturejobs/2018/06/11/git-the-reproducibility-tool-scientists-love-to-hate/
-“I hate Git….  It is one of the worst pieces of software to teach that
-I’ve come across in 35 years of teaching people software.” But, he
-adds, mastering Git is as essential to modern research as learning to
-read English. Those who use Git and have become immune to its
-complexity
-  #+end_quote
-
 ** end goal
-  1. use git to record changes
-  2. use rstudio's git panel
-  3. upload repo and changes to github
-  4. create issues
-  5. create and accept pull requests
-  6. update themebot theme lists
+   1. track changes on personal code (terminal, rstudio)
+   2. collaborate with github (update themebot!)
+
+[[file:simple-flow.png]]
      
-** details
+** details :skip:
 *** git essentials (temrinal, Rstudio)
     init; add/rm, commit, push; pull; diff, status, log, blame
 *** git in Rstudio
@@ -61,16 +60,24 @@ The second best time is now.
  This file is
  ~/Volumes/L/bea_res/Luna/Journal mtg/20210409_git_wf/git.org~
 
- presenting with emacs ~org-mode~ + ~org-presenter~
- ~doom-solarazied-light~ color scheme,
- ~beacon-mode~ and ~global-hl-line-mode~
+ 
+*** emacs :skip:
+  presenting with emacs ~org-mode~ 
+  ~beacon-mode~,  ~global-hl-line-mode~, ~hide-mode-line-mode~
+  ~doom-solarazied-light~ color scheme,
+   ... or parchment or ~doom-acario-light~
 
- ~(setq org-hide-emphasis-markers t)~
- keys: C-c C-u parent, C-c C-p prev
-  speed cmd: n/p=next/prev, f/b=forward/back, m=show me, s=toggle narrow
+  ~(setq org-hide-emphasis-markers t)~
+  keys: C-c C-u parent, C-c C-p prev
+   speed cmd: n/p=next/prev, f/b=forward/back, m=show me, s=toggle narrow
+   C-c C-x C-n, C-c C-o  open next link
+   C-c C-{n,p} next heading
+   C-c C-x C-v toggle images
    
 * Why
-    [[imghttp://phdcomics.com/comics/archive/phd101212s.gif]]
+  
+** PhD Comics
+  [[imghttp://phdcomics.com/comics/archive/phd101212s.gif]]
 ** Versioning 
 *** avoid copies of copies 
     ~xyz_final~, ~xyz_final_final1~, ~xyz_final_final_0409~,
@@ -78,14 +85,13 @@ The second best time is now.
     find that errant "s" accidentally inserted in place of cmd+s
 
    history of changes to the tat2 script. see ~134aeb1~
-   https://github.com/LabNeuroCogDevel/lncdtools/commits/master/tat2
+   [[https://github.com/LabNeuroCogDevel/lncdtools/commits/master/tat2][github/..../tat2]]
 *** organize versions
     branches, tags, commits
-*** experimenting locally (distributed changes)
-    like merging 3 different paper revisions at the same time
+*** experimenting quickly
+    easy undo to known good state. also ~stash~
 *** commits are documentation
     note for future: write good commit messages
-    (bad: "update", "bug fix")
 ** Github Hosting
 
    #+begin_quote http://blogs.nature.com/naturejobs/2018/06/11/git-the-reproducibility-tool-scientists-love-to-hate/
@@ -93,8 +99,7 @@ Git is the price you have to pay in order to use GitHub
    #+end_quote
 
 *** versioned backup
-   lncdr file list
-   https://github.com/LabNeuroCogDevel/LNCDR/tree/master/R
+   lncdr file list: [[https://github.com/LabNeuroCogDevel/LNCDR/tree/master/R][LNCDR]]
 
 *** visual diffs online
    preprocessFunctional only started using ants 3 years ago
@@ -115,38 +120,25 @@ Git is the price you have to pay in order to use GitHub
 ** As a Standard
    adopted elsewhere: brianlife.io, datalad, CRAN
 * What its not
-*** not easy
-*** not centralized
-     not designed for share directory (e.g. ~Hera/.../scripts/~)
-        but still very useful (see "log" and "blame")
-*** not for binary data
-     Not useful for tracking changes in images, nifti files
-     * see ~datalad~ (~git-annex~) to track size, checksum, permissions
-     * onedrive, gdrive, box, etc
-*** ~git~ does not have any concept of issues or pull-requests
-     "forges" (github, gitlab, bitbucket) provide that
-* framework
-#+begin_src badplot
-working   -     staged   -      HEAD   -   online
-        add>          commit>     |  push>
-       <diff>                     |
-|-------------status--------------|log
-#+end_src
+** not magic. but maybe
+   #+begin_quote http://www-cs-students.stanford.edu/~blynn/gitmagic/
+  "any sufficiently advanced technology is indistinguishable from magic"
+  This is a great way to approach Git:
+ newbies can ignore its inner workings and view Git as a gizmo that can
+ amaze friends and infuriate enemies with its wondrous abilities.
+   #+end_quote
 
-* Getting started
-
-  Finally!
-  Open a terminal. RStudio terminal will work
-  
-  Follow along.
-  At the very least, it'll add useful bash history 
-   (up/down arrow, ~Ctrl+r~)
-  
-  NB. ~config~ and ~init~ and ~remote add~ are setup commands.
-     other commands are for actually tracking changes
-
-
-** terminal, really?
+** not easy
+** not centralized
+    not designed for share directory (e.g. ~Hera/.../scripts/~)
+       but still very useful (see "log" and "blame")
+** not for binary data
+    Not useful for tracking changes in images, nifti files
+    * see ~datalad~ (~git-annex~) to track size, checksum, permissions
+    * onedrive, gdrive, box, etc
+** ~git~ has no issues or pull-requests
+    "forges" (github, gitlab, bitbucket) provide that
+* A Terminal, really? Why?
    #+begin_quote https://r-pkgs.org/git.html
 ... because only a handful of the 150+ Git commands are available in
 RStudio, you also need to be familiar with using Git from the shell
@@ -158,14 +150,74 @@ search for a solution with the Git command names.
   * terminal is the default UI of/by/for git developers 
   * it's where stack overflow help is
   * but ~gitk~ and https://git-scm.com/downloads/guis
+    
+** Setup
+
+  * Finally time to do something
+  * Get to a terminal. RStudio terminal will work
+  * At the very least, follow along to add bash history 
+    (up/down arrow, ~Ctrl+r~)
+
+*** the quickest command line introduction
+
+  #+begin_src bash
+    mkdir my-test-git-repo
+    cd $_  # $_ is last argument prev command; same as pushing Alt+. (hold option tap period release alt) 
+	   # same as: cd my-test-git-repo 
+
+    date             # print current date and time
+    date > date.txt  # save current date to the file date.txt
+    cat date.txt     # shows the contents of date.txt
+                     # can also open in R studio 
+    date             # date's moved on but date.txt is forever in the past
+
+    ls -a            # show all files in the current directory
+
+    echo narcissus   # prints narcissus to screen 
+    echo "narcissus" # same thing. quotes used to keep things together
+    echo 'narcissus' # same thing.
+    echo "$_"        # interpolation
+    echo '$_'        # literal
+  #+end_src
+
+*** using alt w/macOS terminals :skip:    
+[[imghttps://cdn.osxdaily.com/wp-content/uploads/2013/02/meta-key-mac-os-x-terminal.jpg]]
+
+
+
+* Framework
+  * working - whats in the files. partially finished work    (tinder)
+  * staging - finished changes probably ready for commitment (dating)
+  * HEAD    - top of history. state forever in the record    (married)
+
+
+#+begin_src plantuml :file simple-flow.png
+  working<->stage:diff
+  working->stage:add
+  stage->HEAD:commit
+  working<->HEAD:status
+  working<-HEAD:checkout
+  working<-stage:reset
+  HEAD->remote:push
+  HEAD<-remote:pull
+#+end_src
+
+#+RESULTS:
+[[file:simple-flow.png]]
+
+* Essential git commands
+  * ~config~, ~init~ and ~remote add~ setup the infrastructure. 
+    like setting "author" in word and setting up a new dropbox folder
+  * other commands actually track changes and are used more often
 
 ** ~config~ - once per computer+user
    #+begin_src shell
 
-     git config --global user.name "Your Name"      # how you'll show up in the logs
+     git config --global user.name "Your Name"      # name in the logs
      git config --global user.email "user@pitt.edu" # should match github 
+     git config --global init.defaultBranch main    # match github's nomenclature 
 
-     # all that did was write to a file
+     # fancy way of writting settings to a file
      git config --list
      cat ~/.gitconfig
 
@@ -179,20 +231,16 @@ initialize the git repository files.
 this creates a ~.git/~ directory at the root of the project
 
    #+begin_src shell
-
-     mkdir my-test-git-repo
-     cd $_  # $_ is last argument from before; also alt+. 
+     # should already be in my-test-git-repo
      git init
 
-     ls -la  # see new .git directory
+     ls -la  # see new .git directory. contains magic
      #+end_src
      
      * This needs to happen only once per coding project.
      * ~add remote~ for github could also happen here.
        We'll come back to that.
-
-*** using alt w/macOS terminals     
-[[imghttps://cdn.osxdaily.com/wp-content/uploads/2013/02/meta-key-mac-os-x-terminal.jpg]]
+     * I'll try point out whats going on in RStudio's git indicators on this first pass. And also cover it specifically later.
 
 ** ~add~, ~commit~ - once per change set
    #+begin_src shell
@@ -202,17 +250,16 @@ this creates a ~.git/~ directory at the root of the project
    #+end_src
 
 ** ~log~, ~status~, ~diff~ - whats happening
-
    #+begin_src shell
      git log                      # history
      git log --oneline            # condensed
 
      git status                   # any changes not tracked
 
-     date > date.txt             # modify file
-     echo "foobar" > foobar.txt  # new file, untracked
+     date > date.txt              # modify file
+     echo "foobar" > foobar.txt   # new file, untracked
 
-     git diff date.txt           # red removed, green added
+     git diff date.txt            # red removed, green added
                                   # foobar.txt not mentioned
 
      git status                   # date.txt and foobar.txt
@@ -220,7 +267,6 @@ this creates a ~.git/~ directory at the root of the project
    #+end_src
 
 ** repeat
-
    #+begin_src shell
      git add date.txt            # tell git to care about change
      git commit -m 'update time' # and document it
@@ -235,22 +281,169 @@ this creates a ~.git/~ directory at the root of the project
 
      head *txt # just to see current state, not git related
      git diff
-     git commit -m 'change metasynatic variable name'
+     #  -a means anything modified or removed
+     # dont need to 'git add' every file every time
+     git commit -a -m 'change metasynatic variable name: now spam'
    #+end_src
    
-** Try it out
-  1. make two new files. add and commit them. confirm with log
-  2. change a file. add. commit. confirm with log
-  3. change one of the files. add. look at diff. anything funny?
-  4. change the same file. look at diff. notice missing history?
-  5. commit double changed file. look at log
+** ~commit~ without -m
+   * without ~-m 'my message'~ git opens $EDITOR to write the message
+   * defaults to ~vi~ (~export EDITOR=nano~ in ~~/.bashrc~)
+     1. ~:q~ to quit and not save == abort message/commit
+     2. ~i~ for insert mode
+     3. ~ESC :wq~ to "write and quit"
+   * ~#~ lines are ignored. git status is commented out for ref.
+
+*** commit message conventions
+    - atomic: commits should change only one thing
+    - pithy topline: concise message. easy to look at one line log
+    - topline, one space, prose: write whatever you want after the second line
+
+      [[imghttps://imgs.xkcd.com/comics/git_commit.png]]
+
+      #+begin_quote git log of EyeTracker project
+7ebbf79  Will Foran  🐛✅ add tests for tracker.py: fix draw_tracking
+66250a2  Will Foran  🎨 move common code into tracker. update cli.py
+52b9b00  Will Foran  🐛 plot_annotation: pupil_x is now value_x
+abb949d  Tian99      Little changeas
+a99cf6e  Tian99      Little updates
+24b074a  Tian99      User interface half finished
+d99c749  Tian99      User Interface
+332cb50  Tian99      User interface half finished
+95b0a49  Tian99      User interface with slight problem
+      #+end_quote
+** ~checkout~, ~stash~
+   #+begin_src bash
+
+     # change date file
+     cat date.txt
+     date > date.txt
+     cat date.txt
+
+     # revert it back to the last "good" one
+     git checkout HEAD -- date.txt
+
+     # go back to even before that
+     git checkout HEAD~1 -- date.txt
+     cat date.txt
+
+*** ~checkout XXXXX~
+    #+begin_src bash
+     # instead of HEAD, HEAD~n, we can use checksum of any commit in the log
+     git log --oneline
+
+     git checkout $XXXXXX -- date.txt
+     cat date.txt
+
+     # OR by matching commit message
+     git checkout '/added date.txt' -- date.txt
+     cat date.txt
+   #+end_src
+
+*** ~stash~
+    stash is nice for quickly discarding everything 
+    but branching more likey what you want to do
+    #+begin_src bash
+      # maybe we're not sure about our changes
+      date > date.txt
+      git stash
+      cat date.txt
+
+      git unstash
+      cat date.txt
+    #+end_src
+** ~branch~
+   This is where it gets exciting!
+
+   I have a crazy idea to try out but I don't want to get it mixed in with what works.
+   #+begin_src bash
+     git branch crazy-idea
+     git checkout crazy-idea
+
+     # same as: git checkout -b crazy-idea
+     date +%s > date.txt
+     git commit -am 'try a new date format: seconds'
+
+     # go back
+     cat date.txt
+     git checkout main # 'main' is 'master' if older git
+     cat date.txt
+
+     # return to branch
+     git checkout crazy-idea
+     cat date.txt
+   #+end_src
+
+*** branch half way into changes
+as long as you haven't ~add~ed~ (and if you have just ~git reset -- file~)
+you can branch after some weird change
+
+    #+begin_src bash
+      git status                  # confirm we're back on main, no changes
+      date +%F > date.txt         # yet another date format
+      git checkout -b date-notime # another new branch
+      git commit -am 'remove time from date.txt'
+    #+end_src
+    
+** ~merge~
+if we like one of the branches, we can bring it back into main
+#+begin_src bash
+  git checkout main
+  git merge date-notime
+  cat date.txt
+  git commit -m 'decided notime was the best date format'
+#+end_src
+
+* Rstudio
+** create "project" (*.Rproj) file
+https://support.rstudio.com/hc/en-us/articles/200532077-Version-Control-with-Git-and-SVN
  
-*** notes
-**** change. add. change. add. commit. tracks as single change
-     add stages for commit. commit finalizes. 
+  1. File -> New Project
+  2. Existing Project
+  3. specify test repo path: ~pwd~ from terminal
+** "Git" panel
+*** ~add~, ~reset~
+   #+begin_src bash
+     date > date.txt # see "Status" column change
+     git status      # as expected
+     # click "Staged" checkbox   -- git add -- date.txt
+     git status      # change moved into "to be comitted"
+
+     # uncheck "Staged" checkbox  -- git reset -- date.txt
+     git status      # change is untracked
+   #+end_src
+
+*** ~commit~ 
+    see "Commit" button. same as running ~git commit~
+
+
+* Try it out
+ suggest making files with multiple lines
+ #+begin_src R :session
+   library(ggplot2)
+   ggplot(mtcars) +  # using default dataset
+     aes(y=mpg, x=disp, color=cyl) +
+     geom_point() +
+     cowplot::theme_cowplot()
+ #+end_src
+
+ and edits like changing title, color, aesthetics
+
+
+** 1. make two new files: a.R, b.R. add and commit them. confirm with log
+** 2. change a.R. add. commit. confirm with log
+** 3. change b.R. add. look at diff. why don't we see the change?
+** 4. change b.R again. look at diff. notice missing history?
+** 5. commit b.R. look at log. why don't we see first modification
+** 6. edit b.txt. create b-branch
+ 
+** notes
+*** change. add. change. add. commit. tracks as single change
+    add stages for commit. commit finalizes. 
 
 * ~push~ to github
   if it's not online, did it even happen?
+
   you can add a new remote (github, gitlab, another folder, computer)
   all commit history will be perserved. even commits before adding the remote
 
@@ -284,8 +477,8 @@ refresh or visit the github page (~gh repo view --web~)
 * experiments
 also see [[ohshitgit.com]] ([[dangitgit.com]] in polite company)
 
-#+begin_src badplot
-working   -     staged   -      HEAD   -   online
+#+begin_src text
+working         staged          HEAD       online
         add>          commit>     |  push>
        <diff>                     |
 |-------------status--------------|log
@@ -319,26 +512,6 @@ Forget this noise, I give up.
     cd stupid-git-repo-dir
   #+end_src
 
-* Rstudio
-** create "project" (*.Rproj) file
-https://support.rstudio.com/hc/en-us/articles/200532077-Version-Control-with-Git-and-SVN
- 
-  1. File -> New Project
-  2. Existing Project
-  3. specify test repo path: ~pwd~ from terminal
-** "Git" panel
-*** ~add~
-   #+begin_src bash
-     date > date.txt # see "Status" column change
-     git status      # as expected
-     # click "Staged" checkbox
-     git status      # change moved into "to be comitted"
-   #+end_src
-
-*** ~commit~ 
-    see "Commit" button
-** 
-
 * Pulling
 * Resources
   
@@ -346,8 +519,7 @@ repo of all *sh *R *m *pl files on LNCD RAIDs
   https://github.com/LabNeuroCogDevel/allscripts
 
 common problem and solution
- https://ohshitgit.com/
- https://dangitgit.com/
+ https://ohshitgit.com/ https://dangitgit.com/
 
 git+Rstudio setup tutorial
  https://r-pkgs.org/git.html
@@ -355,6 +527,9 @@ git+Rstudio setup tutorial
 more detailed git+R tutorial (University of British Columbia STAT 545)
 https://happygitwithr.com/big-picture.html
   https://peerj.com/preprints/3159v2/
+ 
+gentle guide with game analogies. goes into great depth
+  http://www-cs-students.stanford.edu/~blynn/gitmagic/
 
 git official book
  https://git-scm.com/book/en/v2
@@ -378,6 +553,9 @@ https://www.gitkraken.com/teacher-resources#get-started
 
 proposed emoji tags for git commits
 https://gitmoji.dev/
+
+nature blog
+  http://blogs.nature.com/naturejobs/2018/06/11/git-the-reproducibility-tool-scientists-love-to-hate/
 * SCM, VCS
 Source Control Management or Version Control Software:
 
