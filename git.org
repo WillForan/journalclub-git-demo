@@ -125,7 +125,13 @@ Git is the price you have to pay in order to use GitHub
      * onedrive, gdrive, box, etc
 *** ~git~ does not have any concept of issues or pull-requests
      "forges" (github, gitlab, bitbucket) provide that
-
+* framework
+#+begin_src badplot
+working   -     staged   -      HEAD   -   online
+        add>          commit>     |  push>
+       <diff>                     |
+|-------------status--------------|log
+#+end_src
 
 * Getting started
 
@@ -149,7 +155,7 @@ with using Git in a shell because if you get stuck you’ll need to
 search for a solution with the Git command names.
    #+end_quote
 
-  * terminal is what git developers designed for
+  * terminal is the default UI of/by/for git developers 
   * it's where stack overflow help is
   * but ~gitk~ and https://git-scm.com/downloads/guis
 
@@ -181,8 +187,9 @@ this creates a ~.git/~ directory at the root of the project
      ls -la  # see new .git directory
      #+end_src
      
-     this needs to happen only once per coding project.
-     Also
+     * This needs to happen only once per coding project.
+     * ~add remote~ for github could also happen here.
+       We'll come back to that.
 
 *** using alt w/macOS terminals     
 [[imghttps://cdn.osxdaily.com/wp-content/uploads/2013/02/meta-key-mac-os-x-terminal.jpg]]
@@ -242,36 +249,49 @@ this creates a ~.git/~ directory at the root of the project
 **** change. add. change. add. commit. tracks as single change
      add stages for commit. commit finalizes. 
 
-** github: ~push~
-   
-*** open repo  -- once per repository
+* ~push~ to github
+  if it's not online, did it even happen?
+  you can add a new remote (github, gitlab, another folder, computer)
+  all commit history will be perserved. even commits before adding the remote
 
- - from [[http://www.github.com]]
-   tell local about github
+** create repo on github  -- once per repository
+
+*** with website
+ 1. from [[http://www.github.com]]
+ 2. find the green "New" button
+ 3. create new name: ~github-demo~ (for example)
+ 4. use povided code to tell local about github
    #+begin_src bash
     # as it says in the new repo
     #git remote add origin https://github.com/USER/REPO
-    git remote add origin https://github.com/WillForan/github-testing.git
-
+    git remote add origin https://github.com/WillForan/github-demo.git
    #+end_src
 
- - or with ~gh~
-   #+begin_src bash
-     # gh repo new USERNAME/repo-name
-     gh repo new WillForan/test-repo
-   #+end_src
-
-*** push to repo
+*** ~gh~ on the terminal
     #+begin_src bash
-      git push
-
-
+      # gh repo new USERNAME/repo-name
+      gh repo new WillForan/github-demo
     #+end_src
 
-** experiments
+
+** ~push~ repo - often as you want (per commit)
+    #+begin_src bash
+    git push
+    #+end_src
+    
+refresh or visit the github page (~gh repo view --web~)
+
+* experiments
 also see [[ohshitgit.com]] ([[dangitgit.com]] in polite company)
 
-working - staged - HEAD. come back to this from inside Rstudio
+#+begin_src badplot
+working   -     staged   -      HEAD   -   online
+        add>          commit>     |  push>
+       <diff>                     |
+|-------------status--------------|log
+#+end_src
+
+We'll come back to this from inside Rstudio. It'll be easier then 
 #+begin_src bash
 
   date > date.txt
@@ -282,6 +302,8 @@ working - staged - HEAD. come back to this from inside Rstudio
 
   git reset -- date.txt
   git diff
+
+  git checkout HEAD -- date.txt
 
 #+end_src
    
@@ -297,22 +319,25 @@ Forget this noise, I give up.
     cd stupid-git-repo-dir
   #+end_src
 
-* IDE built in tools
-** Rstudio
-*** create "project" (*.Rproj) file
- https://support.rstudio.com/hc/en-us/articles/200532077-Version-Control-with-Git-and-SVN
-*** "Git" panel
+* Rstudio
+** create "project" (*.Rproj) file
+https://support.rstudio.com/hc/en-us/articles/200532077-Version-Control-with-Git-and-SVN
+ 
+  1. File -> New Project
+  2. Existing Project
+  3. specify test repo path: ~pwd~ from terminal
+** "Git" panel
+*** ~add~
+   #+begin_src bash
+     date > date.txt # see "Status" column change
+     git status      # as expected
+     # click "Staged" checkbox
+     git status      # change moved into "to be comitted"
+   #+end_src
 
-
- #+begin_quote https://r-pkgs.org/git.html
- However, because only a handful of the 150+ Git commands are available
- in RStudio, you also need to be familiar with using Git from the shell
- (aka the command line or the console). It’s also useful to be familiar
- with using Git in a shell because if you get stuck you’ll need to
- search for a solution with the Git command names.
- #+end_quote
-** MATLAB
-** Atom, emacs, vim
+*** ~commit~ 
+    see "Commit" button
+** 
 
 * Pulling
 * Resources
