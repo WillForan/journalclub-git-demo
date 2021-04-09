@@ -58,7 +58,9 @@ The second best time is now.
 
 ** colophon
  This file is
- ~/Volumes/L/bea_res/Luna/Journal mtg/20210409_git_wf/git.org~
+   https://github.com/WillForan/journalclub-git-demo/blob/main/git.org
+ and
+   ~/Volumes/L/bea_res/Luna/Journal mtg/20210409_git_wf/git.org~
 
  
 *** emacs :skip:
@@ -139,17 +141,18 @@ Git is the price you have to pay in order to use GitHub
 ** ~git~ has no issues or pull-requests
     "forges" (github, gitlab, bitbucket) provide that
 * A Terminal, really? Why?
-   #+begin_quote https://r-pkgs.org/git.html
-... because only a handful of the 150+ Git commands are available in
-RStudio, you also need to be familiar with using Git from the shell
-(aka the command line or the console). It’s also useful to be familiar
-with using Git in a shell because if you get stuck you’ll need to
-search for a solution with the Git command names.
-   #+end_quote
+** Why
+    #+begin_quote https://r-pkgs.org/git.html
+ ... because only a handful of the 150+ Git commands are available in
+ RStudio, you also need to be familiar with using Git from the shell
+ (aka the command line or the console). It’s also useful to be familiar
+ with using Git in a shell because if you get stuck you’ll need to
+ search for a solution with the Git command names.
+    #+end_quote
 
-  * terminal is the default UI of/by/for git developers 
-  * it's where stack overflow help is
-  * but ~gitk~ and https://git-scm.com/downloads/guis
+   * terminal is the default UI of/by/for git developers 
+   * it's where stack overflow help is
+   * but ~gitk~ and https://git-scm.com/downloads/guis
     
 ** Setup
 
@@ -241,6 +244,8 @@ this creates a ~.git/~ directory at the root of the project
      * ~add remote~ for github could also happen here.
        We'll come back to that.
      * I'll try point out whats going on in RStudio's git indicators on this first pass. And also cover it specifically later.
+
+
 
 ** ~add~, ~commit~ - once per change set
    #+begin_src shell
@@ -453,7 +458,7 @@ https://support.rstudio.com/hc/en-us/articles/200532077-Version-Control-with-Git
  1. from [[http://www.github.com]]
  2. find the green "New" button
  3. create new name: ~github-demo~ (for example)
- 4. use povided code to tell local about github
+ 4. use suggested commands to tell local about github
    #+begin_src bash
     # as it says in the new repo
     #git remote add origin https://github.com/USER/REPO
@@ -462,10 +467,13 @@ https://support.rstudio.com/hc/en-us/articles/200532077-Version-Control-with-Git
 
 *** ~gh~ on the terminal
     #+begin_src bash
-      # gh repo new USERNAME/repo-name
-      gh repo new WillForan/github-demo
-    #+end_src
+      # gh repo new repo-name
+      gh repo new github-demo
+      # [enter, enter] to select public and add to origin
 
+      # open this repos webpage
+      gh repo view --web
+    #+end_src
 
 ** ~push~ repo - often as you want (per commit)
     #+begin_src bash
@@ -474,34 +482,114 @@ https://support.rstudio.com/hc/en-us/articles/200532077-Version-Control-with-Git
     
 refresh or visit the github page (~gh repo view --web~)
 
-* experiments
-also see [[ohshitgit.com]] ([[dangitgit.com]] in polite company)
+** ~pull~ - before every push
+   if you're collaborating on a branch that someone else (e.g. you on another computer) might have modified. you'll want to pull their changes before you start making new ones.
+  ~git pull~
+  
+it's easy until you've both changed the same thing but in different ways. 
+Then you'll have to resolve merge conflicts. That's on the other side of git essentials.
 
-#+begin_src text
-working         staged          HEAD       online
-        add>          commit>     |  push>
-       <diff>                     |
-|-------------status--------------|log
-#+end_src
+* github collaborate: issue, fork, pull-request
+** create an issue
+   not too hard. it's all web based
 
-We'll come back to this from inside Rstudio. It'll be easier then 
-#+begin_src bash
+   1. go to https://github.com/LabNeuroCogDevel/slacktheme_bot
+   2. click "issues" from mid-top left "tab"-ish menu bar
+   3. click green "new"
+   4. make an issue "MYNAME's theme suggests are missing"
+   5. note the issue # for future reference
 
-  date > date.txt
-  git diff
+** fork a repo
+   let's do something about it. we'll get our own copy and fix the issue
 
-  git add date
-  git diff
+   1. go back to https://github.com/LabNeuroCogDevel/slacktheme_bot
+   2. click "fork" in the top left (just under repo name/link)
+   3. fork to your username
+   4. click the green "code" dropdown button
+   5. copy the "https" link (just has ~.git~ appended to it)
+    https://github.com/WillForan/slacktheme_bot.git
+   6. back in the terminal
+    ~git clone [clipboard paste]~
+    paste might be Ctrl+Shift+v (windows and linux)
 
-  git reset -- date.txt
-  git diff
+** fixing 
+   not really git related, but we need have a change to play with pushing
+   
+   #+begin_src bash
+     cd slacktheme_bot/themes
+     echo rat snake > $MYNAME.txt
+     # maybe follow in files rstudio and and more to the file?
 
-  git checkout HEAD -- date.txt
+     git add $MYNAME.txt
+     git commit -m 'fix #xx: add themes by MYNAME' # use your issue # 
+     git push
 
-#+end_src
+     # note we didn't have to fill with origin b/c we cloned
+     # git is smart enough to set the clone source as origin
+   #+end_src
+   
+** TODO pull request
+   if we go back to the github page, it's already suggested we create a pull request! Go for it.
+   
+TODO: from where to where
+
+ I'll show you want it looks like on my end.
+ 
+ NB. we are all using new/different files to avoid having merge conflicts.
+   
+* Breakout groups!
+  Do we still have any time.
+  Is everyone already exhausted?!
+  I think this bit is necessary to codify the mushy knowledge about to disappear into the weekend
+  
+
+** task
+   fix bugs in files funcs/a.R to d.R
+   1. everyone clones the buggy repo
+   2. pick the "pull person" who will apply the fixed pull-requests
+   3. assign each file to one person
+   4. fix your assigned file(s)
+   5. commit the change with a useful message
+   6. push
+   7. send pull request to your "pull person"
+   8. "pull person" accepts all the requests and tests the code
+   9. bonus:
+      1. create a new branch 
+      2. fix the other bugs not assigned to you
+      3. help out
+
+
    
 
-** in a nutshell
+** rstudio clone
+ As I setup groups. clone this repo with Rstudio
+
+  File -> New Project -> Version Control
+
+ Repository URL: https://github.com/WillForan/journalclub-git-demo
+ directory name: (whatever you want, auto set to ~journalclub-git-demo~)
+ subdirectory of: must pick a place
+ 
+
+
+  
+
+* In review
+** covered
+  #+begin_src bash
+    git clone OR git init
+    git add/rm/mv
+    git diff/status
+    git commit
+    # git checkout/branch
+    git push
+  #+end_src
+** major omissions
+   * ~git pull~ examples
+   * fixing merge conflicts
+   * the other 143 git commands
+
+** xkcd
   [[imghttps://imgs.xkcd.com/comics/git.png]]
 
   #+begin_src dangitgit.com (ohshitgit.com)
@@ -512,7 +600,26 @@ Forget this noise, I give up.
     cd stupid-git-repo-dir
   #+end_src
 
-* Pulling
+* SCM, VCS
+Source Control Management or Version Control Software:
+
+
+** History and Choices
+  * email list with "patches" sent back and forth
+  * centralized: SCCS (1972) -> RCS (1982) -> CVS (1986) -> svn (2000)
+  * distributed: BitKeeper (2000) -> *git* (2005). many others
+ 
+** Git won
+   * used to develop Linux
+   * distributed, easy low cost "fork"
+   * social network effects
+
+*** b/c github
+    * github (2008) acquisition by MS (2018).
+    * hosts >190 million repositories (as of 2020-01)
+    * mascot/logo "octocat" by the same guy who drew the twitter bird logo
+
+
 * Resources
   
 repo of all *sh *R *m *pl files on LNCD RAIDs
@@ -556,24 +663,3 @@ https://gitmoji.dev/
 
 nature blog
   http://blogs.nature.com/naturejobs/2018/06/11/git-the-reproducibility-tool-scientists-love-to-hate/
-* SCM, VCS
-Source Control Management or Version Control Software:
-
-Think:
-Word's "track changes" for code (or any text file, and even filesystem metadata)
-
-** History and Choices
-  * email list with "patches" sent back and forth
-  * centralized: SCCS (1972) -> RCS (1982) -> CVS (1986) -> svn (2000)
-  * distributed: BitKeeper (2000) -> *git* (2005). many others
- 
-** Git won
-   * used to develop Linux
-   * distributed, easy low cost "fork"
-   * social network effects
-
-*** b/c github
-    * github (2008) acquisition by MS (2018).
-    * hosts >190 million repositories (as of 2020-01)
-    * mascot/logo "octocat" by the same guy who drew the twitter bird logo
-
