@@ -29,10 +29,6 @@ Word's "track changes" for code
     fork/branch, merge, checkout
 *** forges (github)
     issue, pull request
-*** BFG
-    remove committed passwords, large files
-*** bonus
-    grip, gitmoji, continuous integration
 
 * Meta
 
@@ -43,7 +39,7 @@ The second best time is now.
 
 ** prereqs
     1. git should already be installed.
-    2. have access to a terminal (Rstudio terminal okay)
+    2. have access to a terminal (Rstudio terminal preferred -- today only :) )
 
 ** Workshop w/Will
  There are a few "slides" for context,
@@ -237,13 +233,22 @@ this creates a ~.git/~ directory at the root of the project
      # should already be in my-test-git-repo
      git init
 
-     ls -la  # see new .git directory. contains magic
+     ls -a  # see new .git directory. contains magic
      #+end_src
      
      * This needs to happen only once per coding project.
      * ~add remote~ for github could also happen here.
        We'll come back to that.
-     * I'll try point out whats going on in RStudio's git indicators on this first pass. And also cover it specifically later.
+*** create "project" (*.Rproj) file
+ https://support.rstudio.com/hc/en-us/articles/200532077-Version-Control-with-Git-and-SVN
+ 
+   1. File -> New Project
+   2. Existing Project
+   3. specify test repo path: ~pwd~ from terminal
+      * Also setup RStudio
+	new project, existing directory
+
+	We'll also cover it more later.
 
 
 
@@ -258,6 +263,8 @@ this creates a ~.git/~ directory at the root of the project
    #+begin_src shell
      git log                      # history
      git log --oneline            # condensed
+     # see commit 'sha'/checksum
+     #     author, branch, date, message
 
      git status                   # any changes not tracked
 
@@ -269,7 +276,10 @@ this creates a ~.git/~ directory at the root of the project
 
      git status                   # date.txt and foobar.txt
      git status -uno              # only date.txt (NB. -u no)
+
    #+end_src
+
+  also see rstudio's clock icon
 
 ** repeat
    #+begin_src shell
@@ -292,17 +302,21 @@ this creates a ~.git/~ directory at the root of the project
    #+end_src
    
 ** ~commit~ without -m
+   #+begin_src bash
+    date > date.txt
+    git commit -a    # no -m, runs vi -- if vi/vim is installed
+   #+end_src
    * without ~-m 'my message'~ git opens $EDITOR to write the message
+   * ~#~ lines are ignored. git status is commented out for ref.
    * defaults to ~vi~ (~export EDITOR=nano~ in ~~/.bashrc~)
      1. ~:q~ to quit and not save == abort message/commit
      2. ~i~ for insert mode
      3. ~ESC :wq~ to "write and quit"
-   * ~#~ lines are ignored. git status is commented out for ref.
 
 *** commit message conventions
     - atomic: commits should change only one thing
     - pithy topline: concise message. easy to look at one line log
-    - topline, one space, prose: write whatever you want after the second line
+    - topline, empty line, prose: write whatever you want after the second line
 
       [[imghttps://imgs.xkcd.com/comics/git_commit.png]]
 
@@ -331,19 +345,20 @@ d99c749  Tian99      User Interface
      # go back to even before that
      git checkout HEAD~1 -- date.txt
      cat date.txt
-
-*** ~checkout XXXXX~
-    #+begin_src bash
-     # instead of HEAD, HEAD~n, we can use checksum of any commit in the log
-     git log --oneline
-
-     git checkout $XXXXXX -- date.txt
-     cat date.txt
-
-     # OR by matching commit message
-     git checkout '/added date.txt' -- date.txt
-     cat date.txt
    #+end_src
+***  ~checkout SHA~
+
+     #+begin_src bash
+      # instead of HEAD, HEAD~n, we can use checksum of any commit in the log
+      git log --oneline
+
+      git checkout $XXXXXX -- date.txt
+      cat date.txt
+
+      # OR by matching commit message
+      git checkout ':/added date.txt' -- date.txt
+      cat date.txt
+    #+end_src
 
 *** ~stash~
     stash is nice for quickly discarding everything 
@@ -354,7 +369,7 @@ d99c749  Tian99      User Interface
       git stash
       cat date.txt
 
-      git unstash
+      git stash pop
       cat date.txt
     #+end_src
 ** ~branch~
@@ -377,10 +392,12 @@ d99c749  Tian99      User Interface
      # return to branch
      git checkout crazy-idea
      cat date.txt
+     
+     # also see rstudio branch
    #+end_src
 
 *** branch half way into changes
-as long as you haven't ~add~ed~ (and if you have just ~git reset -- file~)
+as long as you haven't ~add~'ed (and if you have just ~git reset -- file~)
 you can branch after some weird change
 
     #+begin_src bash
@@ -396,18 +413,19 @@ if we like one of the branches, we can bring it back into main
   git checkout main
   git merge date-notime
   cat date.txt
-  git commit -m 'decided notime was the best date format'
 #+end_src
 
+see Rstudios log with "all branches"
+
 * Rstudio
-** create "project" (*.Rproj) file
-https://support.rstudio.com/hc/en-us/articles/200532077-Version-Control-with-Git-and-SVN
+ https://support.rstudio.com/hc/en-us/articles/200532077-Version-Control-with-Git-and-SVN
  
-  1. File -> New Project
-  2. Existing Project
-  3. specify test repo path: ~pwd~ from terminal
+
+ 
 ** "Git" panel
 *** ~add~, ~reset~
+
+[[file:simple-flow.png]]
    #+begin_src bash
      date > date.txt # see "Status" column change
      git status      # as expected
@@ -422,7 +440,7 @@ https://support.rstudio.com/hc/en-us/articles/200532077-Version-Control-with-Git
     see "Commit" button. same as running ~git commit~
 
 
-* Try it out
+* Try it out :skip:
  suggest making files with multiple lines
  #+begin_src R :session
    library(ggplot2)
@@ -468,7 +486,7 @@ https://support.rstudio.com/hc/en-us/articles/200532077-Version-Control-with-Git
 *** ~gh~ on the terminal
     #+begin_src bash
       # gh repo new repo-name
-      gh repo new github-demo
+      gh repo create github-demo
       # [enter, enter] to select public and add to origin
 
       # open this repos webpage
@@ -478,6 +496,8 @@ https://support.rstudio.com/hc/en-us/articles/200532077-Version-Control-with-Git
 ** ~push~ repo - often as you want (per commit)
     #+begin_src bash
     git push
+    # or if git suggets
+    # git push --set-upstream origin main
     #+end_src
     
 refresh or visit the github page (~gh repo view --web~)
@@ -501,6 +521,12 @@ Then you'll have to resolve merge conflicts. That's on the other side of git ess
 
 ** fork a repo
    let's do something about it. we'll get our own copy and fix the issue
+   
+   #+begin_src bash
+   gh repo fork LabNeuroCogDevel/slacktheme_bot
+   #+end_src
+   
+   OR
 
    1. go back to https://github.com/LabNeuroCogDevel/slacktheme_bot
    2. click "fork" in the top left (just under repo name/link)
@@ -520,7 +546,7 @@ Then you'll have to resolve merge conflicts. That's on the other side of git ess
      echo rat snake > $MYNAME.txt
      # maybe follow in files rstudio and and more to the file?
 
-     git add $MYNAME.txt
+     git add $MYNAME.txt  # cant "git -a" b/c file isn't already tracked
      git commit -m 'fix #xx: add themes by MYNAME' # use your issue # 
      git push
 
@@ -528,14 +554,29 @@ Then you'll have to resolve merge conflicts. That's on the other side of git ess
      # git is smart enough to set the clone source as origin
    #+end_src
    
-** TODO pull request
-   if we go back to the github page, it's already suggested we create a pull request! Go for it.
-   
-TODO: from where to where
+** pull request
 
- I'll show you want it looks like on my end.
+*** untested ~gh~
+    #+begin_src 
+   git checkout -b MYNAME-branch
+   gh pr create --fill
+   gh repo view --web
+    #+end_src
+
+*** web
+    if we go back to the github page
+    github's already suggested we create a pull request! Go for it.
+   
+    0. https://github.com/YOU/slacktheme_bot/pull
+    1. click "Pull request"
+    2. default is good. base: Lab <- head: your repo
+    3. set title. green "create pull request"
+
  
- NB. we are all using new/different files to avoid having merge conflicts.
+ on the other end
+  https://github.com/LabNeuroCogDevel/slacktheme_bot/pulls
+ 
+  NB. we are all using new/different files to avoid having merge conflicts.
    
 * Breakout groups!
   Do we still have any time.
@@ -545,6 +586,8 @@ TODO: from where to where
 
 ** task
    fix bugs in files funcs/a.R to d.R
+   https://github.com/WillForan/journalclub-git-demo
+
    1. everyone clones the buggy repo
    2. pick the "pull person" who will apply the fixed pull-requests
    3. assign each file to one person
@@ -586,8 +629,13 @@ TODO: from where to where
   #+end_src
 ** major omissions
    * ~git pull~ examples
+   * ~.gitignore~
    * fixing merge conflicts
    * the other 143 git commands
+   * BFG: remove committed passwords, large files
+     https://rtyley.github.io/bfg-repo-cleaner/
+     dont use ~git -A~ or you'll get to know BFG well
+   * grip, gitmoji, continuous integration
 
 ** xkcd
   [[imghttps://imgs.xkcd.com/comics/git.png]]
@@ -628,6 +676,9 @@ repo of all *sh *R *m *pl files on LNCD RAIDs
 common problem and solution
  https://ohshitgit.com/ https://dangitgit.com/
 
+BFG Repo-Cleaner (remove committed passwords and large files)
+  https://rtyley.github.io/bfg-repo-cleaner/
+
 git+Rstudio setup tutorial
  https://r-pkgs.org/git.html
 
@@ -659,7 +710,8 @@ videos developed by gitkraken ($$ git gui client)
 https://www.gitkraken.com/teacher-resources#get-started 
 
 proposed emoji tags for git commits
-https://gitmoji.dev/
+  https://gitmoji.dev/
 
 nature blog
   http://blogs.nature.com/naturejobs/2018/06/11/git-the-reproducibility-tool-scientists-love-to-hate/
+
